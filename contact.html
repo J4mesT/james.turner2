@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - James Turner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Move grain canvas to very top of body for full overlay -->
+  <canvas class="grain" id="grain-canvas"></canvas>
+  <script>
+    // Live animated film grain using canvas
+    const canvas = document.getElementById('grain-canvas');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    const ctx = canvas.getContext('2d');
+    function drawGrain() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const w = canvas.width;
+      const h = canvas.height;
+      const imageData = ctx.createImageData(w, h);
+      const pixels = imageData.data;
+      for (let i = 0; i < pixels.length; i += 4) {
+        const v = (Math.random() * 255) | 0;
+        pixels[i] = v;
+        pixels[i + 1] = v;
+        pixels[i + 2] = v;
+        pixels[i + 3] = 50; // alpha (~0.2)
+      }
+      ctx.putImageData(imageData, 0, 0);
+      requestAnimationFrame(drawGrain);
+    }
+    drawGrain();
+  </script>
+
+  <!-- Top home button removed; relocated below form -->
+
+  <section class="contact-section">
+    <div class="contact-content">
+      <h1>Send Me a Message</h1>
+      <form action="https://formspree.io/f/mblanjgk" method="POST">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+      <div class="return-home-wrapper">
+        <a href="index.html" class="return-home-link">
+          <span class="back-arrow" aria-hidden="true">&#8592;</span>
+          <span class="return-text">Home</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
+  <script>
+    const lenis = new Lenis();
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    document.querySelectorAll('.top-nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        if (link.hash) {
+          e.preventDefault();
+          const target = document.querySelector(link.hash);
+          if (target) lenis.scrollTo(target);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
