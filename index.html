@@ -80,7 +80,34 @@
     </div>
     <div class="about-text-container">
       <h2>About Me</h2>
-      <p>not sure what to add to this bit</p>
+      <p></p>
+      <!-- About subsections -->
+      <div class="about-subsection">
+        <h3>Education</h3>
+        <p>
+          I completed my GCSEs at the Moulton School and Science College, obtaining 11 GCSEs (6 A*-A, 5 B) and 3 A-Levels (ABB), achieving awards of academic excellence throughout my GCSE study and the Physics Award for Academic Excellence during A-Levels. I am currently pursuing an Mphys in Physics with Astrophysics at the University of Leicester, expected graduation in 2026. Notable modules include General Relativity and Quantum Fields, Supermassive Black Holes and Exoplanets, and Quantum Mechanics, alongside practical coursework in Python programming and data analysis. During my third year I undertook a research project working under Dr Matt Burleigh observing transiting exoplanets and using the photometric decrease in observed flux from a host start to calculate planetary radii. -Add about dissertation here-
+
+        </p>
+      </div>
+      <div class="about-subsection">
+        <h3>Hobbies</h3>
+        <p>
+          Throughout my life I have had a variety of hobbies and interests, sports have been an integral part of my day-to-day life since a young age. Competing in football for different teams my entire life, climbing for over 5 years, and now at university competing nationally in both swimming and dodgeball. Since beginning university I sparked an interest in astrophotography, using the University of Leicester's observatory to take long exposure images of night sky subjects such as Orions Nebula and the solar system's planets. Other hobbies include computing and technology, since a young age I have had a passion for technology and computers, and have challenged myself to learn new skills in this area, such as building my own computer and learning programming languages such as Python and Javascript to make websites.
+        </p>
+      </div>
+      <div class="about-subsection">
+        <h3>Skills</h3>
+        <div class="skill-tiles">
+          <span class="skill-tile">Python Programming and Data Analysis (NumPy, Pandas, Matplotlib)</span>
+          <span class="skill-tile">JavaScript</span>
+          <span class="skill-tile">Telescope Operation and Data Handling</span>
+          <span class="skill-tile">LaTeX</span>
+          
+          
+
+
+        </div>
+      </div>
     </div>
   </section>
   <script>
@@ -108,12 +135,18 @@
           <span>Projects</span><span>Projects</span>
         </div>
       </div>
-    </div>
+  </div>
     <div class="projects" id="projects">
       <div class="project-card">
   <img src="images/transit.png" alt="Transit screenshot">
         <h3 class="project-card-title">Observing Transiting Exoplanets</h3>
         <p class="project-card-description">Used the Leicester University observatory to calculate the radii of exoplanets HAT-P 61 b, XO-3 b and unpublished candidate exoplanet TOI-3887 using measured decreased flux from their respective host stars. Making conclusions on not only the radius of each star but orbital and planetary characteristics.</p>
+        <div class="project-card-actions">
+          <button class="download-report-btn" onclick="downloadReport()">
+            <i class="fas fa-download"></i>
+            Download Report
+          </button>
+        </div>
       </div>
       <div class="project-card">
         <img src="images/leaf.png" alt="Project 2 screenshot">
@@ -122,11 +155,22 @@
               Meridian Space Command we used Python to create a data prediction model using machine learning.</p>
       </div>
       <div class="project-card">
-        <img src="images/project3.jpg" alt="Project 3 screenshot">
-        <h3 class="project-card-title">Project 3</h3>
-        <p class="project-card-description">description</p>
+        <img src="images/flowcytometry.png" alt="Project 3 screenshot">
+        <h3 class="project-card-title">Investigating Life on School Campus
+        </h3>
+        <p class="project-card-description">Founded a research group in collaboration with the University of Cambridge and supported by the Royal Society Partnership Grant to investigate life within Moulton School and Science College's on campus pond. Using a flow cytometer to analyse samples and discuss findings with the Cambridge Institute for Medical Research's Head of Flow Cytometry Dr Reiner Schulte.
+         <br>
+         <a href="https://www.cimr.cam.ac.uk/news/new-home-some-old-equipment-inspire-future-researchers" target="_blank" rel="noopener" style="display:inline-block;margin-top:0.5em;word-break:break-all;">https://www.cimr.cam.ac.uk/news/new-home-some-old-equipment-inspire-future-researchers</a>
+          
+          </p>
+      </div>
+      <div class="project-card">
+        <img src="images/project4.png" alt="Project 4 screenshot">
+        <h3 class="project-card-title">Project 4</h3>
+        <p class="project-card-description">Description for project 4.</p>
       </div>
     </div>
+  <div class="carousel-indicators"></div>
   </section>
   <section id="new-section" class="new-section">
     <!-- empty space section -->
@@ -135,27 +179,86 @@
     <div class="footer-content">
       <div class="footer-name clash">Contact</div>
       <div class="social-links">
-          <a href="https://github.com/J4mesT" class="social-button github" target="_blank" rel="noopener">
-            <img src="images/github-icon.png" alt="GitHub Icon" class="social-icon">GitHub
-          </a>
-          <a href="https://linkedin.com/in/jamesturneruk" class="social-button linkedin" target="_blank" rel="noopener">
-            <img src="images/linkedin-icon.png" alt="LinkedIn Icon" class="social-icon">LinkedIn
-          </a>
-          <a href="contact.html" class="social-button message" target="_self" rel="noopener">
-            <img src="images/mail-icon.png" alt="Mail Icon" class="social-icon">Message
-          </a>
+          <a href="https://github.com/J4mesT" class="social-button github" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/jamesturneruk" class="social-button linkedin" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="contact.html" class="social-button message" target="_self" rel="noopener">Message</a>
       </div>
+      <a href="#home" class="go-to-top">
+        <div class="go-to-top-text">Back<br>to top</div>
+        <img src="images/arrow.svg" alt="Up arrow" class="back-to-top-arrow">
+      </a>
     </div>
   </section>
   <script>
     // Smooth scroll nav links using Lenis
-    document.querySelectorAll('.top-nav a').forEach(link => {
+    document.querySelectorAll('.top-nav a, .go-to-top').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
         const target = document.querySelector(link.getAttribute('href'));
         if (target) {
           lenis.scrollTo(target);
         }
+      });
+    });
+  </script>
+  <script>
+    // Download report function
+    function downloadReport() {
+      const link = document.createElement('a');
+      link.href = 'docs/JTTransitReport.pdf';
+      link.download = 'Exoplanet-Transit-Observation-Report.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+  <script>
+    // Drag-to-scroll for projects carousel
+    const projects = document.getElementById('projects');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    projects.addEventListener('mousedown', e => {
+      isDown = true;
+      projects.classList.add('active');
+      startX = e.pageX - projects.offsetLeft;
+      scrollLeft = projects.scrollLeft;
+    });
+    projects.addEventListener('mouseleave', () => {
+      isDown = false;
+      projects.classList.remove('active');
+    });
+    projects.addEventListener('mouseup', () => {
+      isDown = false;
+      projects.classList.remove('active');
+    });
+    projects.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - projects.offsetLeft;
+      const walk = (x - startX) * 1; // smoother scroll
+      projects.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+  <script>
+    // Carousel indicators
+    const indicatorsContainer = document.querySelector('.carousel-indicators');
+    const cards = document.querySelectorAll('#projects .project-card');
+    cards.forEach((card, idx) => {
+      const dot = document.createElement('span');
+      dot.className = 'dot' + (idx === 0 ? ' active' : '');
+      dot.addEventListener('click', () => {
+        const left = card.offsetLeft;
+        document.getElementById('projects').scrollTo({ left, behavior: 'smooth' });
+      });
+      indicatorsContainer.appendChild(dot);
+    });
+    document.getElementById('projects').addEventListener('scroll', () => {
+      const scrollLeft = document.getElementById('projects').scrollLeft;
+      const cardWidth = document.querySelector('#projects .project-card').offsetWidth;
+      const idx = Math.round(scrollLeft / cardWidth);
+      document.querySelectorAll('.carousel-indicators .dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === idx);
       });
     });
   </script>

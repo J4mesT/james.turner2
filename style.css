@@ -70,6 +70,15 @@
   font-weight: normal;
   font-style: normal;
 }
+/* Erode Regular Font */
+@font-face {
+  font-family: 'ErodeRegular';
+  src: url('./Erode_Complete/Fonts/WEB/fonts/Erode-Regular.woff2') format('woff2'),
+       url('./Erode_Complete/Fonts/WEB/fonts/Erode-Regular.woff') format('woff'),
+       url('./Erode_Complete/Fonts/WEB/fonts/Erode-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* Global Styles */
 body {
@@ -166,11 +175,48 @@ body {
   margin-top: -3rem;
 }
 /* Projects Grid Layout */
+/* Projects Carousel Layout */
 .projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  overflow-x: auto;
+  -webkit-user-select: none; /* disable text selection */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
   gap: 2rem;
   margin: 4rem 2rem;
+  padding-bottom: 1rem;
+  cursor: grab;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scroll-behavior: smooth; /* Smooth scroll for programmatic scrolls */
+}
+.projects.active {
+  cursor: grabbing;
+}
+/* Hide scrollbar for WebKit browsers */
+/* Hide scrollbar for WebKit browsers */
+.projects::-webkit-scrollbar {
+  display: none;
+}
+/* Carousel Indicators */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+.carousel-indicators .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #d7c5a1;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+.carousel-indicators .dot.active {
+  background: #972e00;
 }
 
 /* Project card styling (consolidated & enhanced) */
@@ -184,6 +230,14 @@ body {
   flex-direction: column;
   position: relative;
   transition: transform .4s cubic-bezier(.25,.8,.25,1), box-shadow .4s ease;
+  height: 450px; /* Fixed height for uniform size */
+  flex: 0 0 800px; /* Fixed width for uniform size */
+  width: 800px; /* Ensure consistent card width */
+  /* Prevent text and image selection */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 .project-card::before {
   content: "";
@@ -204,6 +258,16 @@ body {
   background: #fff3e0;
   padding: 1.25rem 1rem 0.75rem;
   margin: 0 auto 0.5rem;
+  /* Prevent image dragging and selection */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  pointer-events: none;
 }
 .project-card-title {
   font-family: 'ClashDisplay', sans-serif;
@@ -221,6 +285,48 @@ body {
   color: #5a3b2a;
 }
 .project-card:last-child { margin-bottom: 0; }
+
+/* Project card actions (buttons) */
+.project-card-actions {
+  padding: 0 1.25rem 1.25rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.download-report-btn {
+  background: linear-gradient(135deg, #972e00 0%, #b83d00 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: 'ClashDisplay', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(151, 46, 0, 0.2);
+  /* Allow button to be interactive despite parent user-select: none */
+  pointer-events: auto;
+  user-select: none;
+}
+
+.download-report-btn:hover {
+  background: linear-gradient(135deg, #b83d00 0%, #d44700 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(151, 46, 0, 0.3);
+}
+
+.download-report-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(151, 46, 0, 0.3);
+}
+
+.download-report-btn i {
+  font-size: 0.85rem;
+}
 /* About Me Section (styled like main) */
 /* About Me Section (styled like main) */
 .about-section {
@@ -254,13 +360,46 @@ body {
   font-family: 'ClashDisplay', sans-serif;
   font-size: clamp(3rem, 8vw, 6rem);
   font-weight: bold;
+  margin-top: -1rem; /* move title up slightly */
   margin-bottom: 1rem;
   color: #ffe0b2;
 }
 
 .about-text-container p {
-  font-size: 1.2rem;
+  font-family: 'ErodeRegular', sans-serif;
+  font-size: 1.5rem;
   line-height: 1.6;
+}
+/* About Me subsections */
+.about-subsection {
+  margin-top: 1.5rem;
+}
+.about-subsection h3 {
+  font-family: 'ClashDisplay', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #ffe0b2;
+}
+.about-subsection p {
+  font-family: 'ErodeRegular', sans-serif;
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+/* Skills tiles container and individual tiles */
+.skill-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.skill-tile {
+  background: rgba(255, 224, 178, 0.3);
+  color: #ffe0b2;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-family: 'ClashDisplay', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 /* Stock image gallery in About section */
@@ -281,10 +420,11 @@ body {
   background: #444;
   color: #d7c5a1;
   padding: 2rem 1rem;
+  position: relative; /* For positioning context */
 }
 .footer-content {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 100%; /* full width, no auto margin */
 }
@@ -298,39 +438,73 @@ body {
 }
 .social-links {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   flex: 1;
-  justify-content: space-evenly;
-  gap: 0;
+  gap: 1rem;
 }
 /* Updated Social Media Button Styles */
 .social-links .social-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
   text-decoration: none;
   color: #fff8e1;
-  font-family: 'Oswald', Arial, sans-serif; /* match project-card-description */
-  font-size: .95rem;
-  padding: 0.6rem 1rem; /* increased padding */
-  border-radius: 8px;  /* more rounded corners */
-  background: linear-gradient(45deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  font-family: 'ClashDisplay', Arial, sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  transition: color 0.2s ease;
 }
 .social-links .social-button:hover {
-  background: rgba(255,248,225,0.9);
-  color: #972e00;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  color: #d7c5a1;
+  background: none;
+  box-shadow: none;
 }
 /* End Updated Social Media Button Styles */
+
+.go-to-top {
+  font-family: 'ClashDisplay', Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff8e1;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex; /* Use inline-flex for better alignment */
+  align-items: center;
+  position: absolute; /* Needed for absolute positioning of the arrow */
+  padding: 0.5rem 1rem 0.5rem 0rem; /* Add padding for the arrow */
+  line-height: 1;
+  right: 3%;
+  top: 60%
+}
+
+.go-to-top-text {
+  text-align: left;
+}
+
+.go-to-top:hover {
+  color: #d7c5a1;
+}
+
+.back-to-top-arrow {
+  position: absolute;
+  left: 95%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px; /* Increased size */
+  height: 50px; /* Increased size */
+  transition: transform 0.3s ease;
+}
+
+.go-to-top:hover .back-to-top-arrow {
+  transform: translatey(-50%) translateY(-4px); /* Adjust hover effect */
+}
 
 /* Message button inherits base social-button styles */
 
 /* Social Icon Adjustments */
 .social-links .social-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+  display: none;
 }
 
 /* Navigation Bar */
@@ -352,8 +526,15 @@ body {
   color: #fff8e1;
   font-weight: 100;
   text-decoration: underline;
-  margin: 0 12rem;
+  margin: 0 4vw; /* Responsive margin for smaller screens */
   display: inline-block;
+  transition: margin 0.3s ease-out; /* Smooth transition for resizing */
+}
+
+@media (min-width: 1800px) {
+  .top-nav a {
+    margin: 0 12rem; /* Larger fixed margin for very wide screens */
+  }
 }
  .top-nav a:hover,
  .top-nav a.active {
@@ -395,7 +576,7 @@ body {
   font-weight: 600;    /* thicker weight */
   line-height: 1.2;    /* increased line-height for descenders */
   color: #972e00;
-  animation: projects-title-marquee 20s linear infinite;
+  animation: projects-title-marquee 40s linear infinite;
   will-change: transform;
 }
 .projects-title-track span { 
@@ -442,6 +623,14 @@ body {
   color: #972e00;
   margin-bottom: 1.5rem;
   text-align: center;
+}
+/* Smaller email note under main heading */
+.contact-email-note {
+  display: block;
+  font-size: 1.2rem;
+  font-family: 'Gambarino', sans-serif;
+  color: #444;
+  margin-top: 0.5rem;
 }
 .contact-content label {
   display: block;
@@ -503,3 +692,125 @@ body {
   transform: translate(-4px, -2px);
 }
 /* End Return Home link */
+/* Responsive adjustments for smaller screens */
+@media (max-width: 900px) {
+  /* Main title adjustments for mobile */
+  .big-title {
+    position: static; /* Reset absolute positioning */
+    top: auto;
+    right: auto;
+    width: 100%;
+    margin: 2rem -1rem; /* Reset negative margins */
+    text-align: right; /* Snap title to right edge */
+    line-height: 1.1;
+  }
+  /* Hide profile image on mobile */
+  .about-image-container {
+    display: none;
+  }
+  .big-title .line1,
+  .big-title .line2,
+  .big-title .line3,
+  .big-title .line4 {
+    margin-right: 0; /* Remove offset margins */
+  }
+  /* Projects carousel: show one project per view */
+  .projects {
+    display: flex;
+    flex-direction: row;
+    margin: 2rem 0;
+    padding: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    cursor: grab;
+  }
+  .projects.active {
+    cursor: grabbing;
+  }
+  .project-card {
+    flex: 0 0 100%;
+    width: 100%;
+    height: auto;
+    margin: 0 1rem 0 0; /* spacing between cards */
+    scroll-snap-align: start;
+  }
+  .project-card img {
+    max-height: 180px;
+    margin: 0 auto 1rem;
+  }
+  /* Projects title font size smaller */
+  .projects-title-track {
+    font-size: clamp(2rem, 6vw, 4rem);
+    gap: 1.5rem;
+  }
+  /* About section: column layout */
+  .about-section {
+    flex-direction: column;
+    padding: 4rem 1rem;
+  }
+  .about-image-container,
+  .about-text-container {
+    flex: none;
+    width: 100%;
+  }
+  /* Footer: center content and stack vertically */
+  .site-footer .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  /* Back to top button: reset positioning */
+  .go-to-top {
+    position: static;
+    margin: 2rem auto 0;
+  }
+  /* Remove dithered background image on mobile */
+  .main-section,
+  .contact-section {
+    background: #972e00;
+  }
+  /* Adjust navigation and section spacing to prevent overlap */
+  .top-nav {
+    position: static;
+    background: none;
+    padding: 1rem 0;
+    z-index: auto;
+  }
+  /* Ensure main section has adequate padding */
+  .main-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  /* Add spacing between sections */
+  .portfolio-section {
+    margin-top: 4rem;
+    padding: 2rem 1rem;
+  }
+  .about-section {
+    margin-top: 4rem;
+    padding: 2rem 1rem;
+  }
+  .site-footer {
+    margin-top: 4rem;
+    padding: 2rem 1rem;
+  }
+  /* Hide Back to top on mobile */
+  .go-to-top {
+    display: none !important;
+  }
+  /* Contact section: larger heading, smaller social buttons */
+  .footer-name.clash {
+    font-size: clamp(6rem, 12vw, 10rem);
+  }
+  .social-links .social-button {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+  }
+}
+/* Fix big-title clipping on very small screens */
+@media (max-width: 420px) {
+  .big-title {
+    font-size: calc(8vw + 1rem); /* ensure legible on narrow screens */
+    margin: 2rem -1rem; /* add horizontal padding */
+  }
+}
