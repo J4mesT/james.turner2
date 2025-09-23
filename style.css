@@ -92,7 +92,7 @@ body {
   position: relative;
   min-height: 100vh;
   /* Background image with orange fallback */
-  background: url('dithered-image(2).png') left -7vw top 0/60vw auto no-repeat, #972e00;
+  background: url('images/sunglass.png') left -7vw top 0/60vw auto no-repeat, #972e00;
   display: block;
   overflow: hidden;
 }
